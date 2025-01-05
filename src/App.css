@@ -1,0 +1,7 @@
+.App {
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  transition: background-color 0.5s;
+}
