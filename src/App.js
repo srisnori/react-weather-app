@@ -4,6 +4,7 @@ import axios from "axios";
 function App() {
   const [city, setCity] = useState("");
   const [temperature, setTemperature] = useState(null);
+  const [humidity, sethumidity] = useState("");
   const [error, setError] = useState("");
   const [unit, setUnit] = useState("metric");
 
@@ -17,10 +18,12 @@ function App() {
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`
       );
       setTemperature(response.data.main.temp);
+      sethumidity(response.data.main.humidity)
       setError("");
     } catch (err) {
       setError("City not found");
       setTemperature(null);
+      sethumidity(null);
     }
   };
 
@@ -38,7 +41,8 @@ function App() {
       {error && <p>{error}</p>}
       {temperature !== null && (
         <div>
-          <h2>Current Temperature: {temperature}° {unit === "metric" ? "C" : "F"}</h2>
+          <h2>Temperature: {temperature}° {unit === "metric" ? "C" : "F"}</h2>
+          <h2>Humidity: {humidity}%</h2>
         </div>
       )}
     </div>
