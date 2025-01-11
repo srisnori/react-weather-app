@@ -5,6 +5,7 @@ function App() {
   const [city, setCity] = useState("");
   const [temperature, setTemperature] = useState(null);
   const [humidity, sethumidity] = useState("");
+  const [precipitation, setPrecipitation] = useState("");
   const [error, setError] = useState("");
   const [unit, setUnit] = useState("metric");
 
@@ -18,12 +19,17 @@ function App() {
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`
       );
       setTemperature(response.data.main.temp);
-      sethumidity(response.data.main.humidity)
+      sethumidity(response.data.main.humidity);
+      
+      const precipitationData = response.data.rain ? response.data.rain["1h"] : 0; // 1h is for 1 hour precipitation
+      setPrecipitation(precipitationData);
+
       setError("");
     } catch (err) {
       setError("City not found");
       setTemperature(null);
       sethumidity(null);
+      setPrecipitation(null);
     }
   };
 
@@ -43,6 +49,7 @@ function App() {
         <div>
           <h2>Temperature: {temperature}° {unit === "metric" ? "C" : "F"}</h2>
           <h2>Humidity: {humidity}%</h2>
+          <h2>Precipitation: {precipitation}%</h2>
         </div>
       )}
     </div>
