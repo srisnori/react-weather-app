@@ -59,27 +59,28 @@ function App() {
       />
       <button onClick={fetchWeather}>Get Temperature</button>
 
-      <div>
-        <button
-          onClick={() => handleUnitChange("metric")}
-          disabled={unit === "metric"}
-        >
-          Celsius (°C)
-        </button>
-        <button
-          onClick={() => handleUnitChange("imperial")}
-          disabled={unit === "imperial"}
-        >
-          Fahrenheit (°F)
-        </button>
-      </div>
-
       {error && <p>{error}</p>}
       {temperature !== null && (
-        <div>
-          <h2>
-            Temperature: {convertTemperature(temperature, unit)}°{" "}
-            {unit === "metric" ? "C" : "F"}
+          <div>
+            <h2>
+              Temperature: {convertTemperature(temperature, unit)}°{" "}
+              {unit === "metric" ? "C" : "F"}
+              <div>
+          <button
+            onClick={() => handleUnitChange("metric")}
+            disabled={unit === "metric"}
+          >
+            Celsius (°C)
+          </button>
+          <button
+            onClick={() => handleUnitChange("imperial")}
+            disabled={unit === "imperial"}
+          >
+            Fahrenheit (°F)
+          </button>
+        
+        
+        </div>
           </h2>
           <h2>Humidity: {humidity}%</h2>
           <h2>Precipitation: {precipitation}%</h2>
